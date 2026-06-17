@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<form class="formulario" action="{{ url_for('inscritos.inscrever') }}" method="POST">
+ <!-- Token de protecao CSRF -->
+ <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+ <div class="campo">
+    <label for="nome">Nome</label>
+    <input name="nome" id="nome" type="text" 
+         placeholder="Digite seu nome..." 
+         pattern="^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)*$"
+         title="Digite um nome válido (apenas letras e espaços)" required aria-required="true">
+ </div>
+ <div class="campo">
+   <select name="minicurso" id="minicurso" aria-label="Selecione o Minicurso" required aria-required="true">
+     <option value="" disabled selected>Minicursos</option>
+     {% for minicurso in minicursos %}
+       <option value="{{ minicurso.id }}">{{ minicurso.nome }}</option>
+     {% endfor %}
+   </select>
+  </div>
+ <div class="campo">  
+   <button type="submit">Inscrever</button>
+ </div>
+</form>
+
+{% endblock %}

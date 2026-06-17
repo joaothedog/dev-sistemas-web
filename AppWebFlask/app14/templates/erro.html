@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h2>Inscrição inválida!</h2>
+
+<p> {{ mensagem }} </p>
+
+<div style="text-align: center;">
+  <a href="{{ url_for('inscritos.index') }}">Voltar</a>
+</div>
+
+{% endblock %}

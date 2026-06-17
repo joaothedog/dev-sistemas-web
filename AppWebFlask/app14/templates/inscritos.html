@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<table border="1">
+    <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Minicurso</th>
+        <th scope="col">Ação</th>
+    </tr>
+
+    {% for inscrito in inscritos %}
+    <tr>
+        <td>{{ inscrito.nome }}</td>
+        <td>{{ inscrito.minicurso_nome }}</td>
+        <td>
+           <form action="{{ url_for('inscritos.excluir') }}" method="POST">
+             <!-- Token de protecao CSRF -->
+             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+             <input name="id" type="hidden" value='{{ inscrito.id }}'>
+             <button type="submit" aria-label="Excluir inscrição de {{ inscrito.nome }}">Excluir</button>
+           </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<div style="text-align: center;">
+  <a href="{{ url_for('inscritos.index') }}">Voltar</a>
+</div>
+
+{% endblock %}

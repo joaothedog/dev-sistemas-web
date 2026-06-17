@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h2>Editar Minicurso</h2>
+
+<form class="formulario" action="{{ url_for('minicursos.editar', minicurso_id=minicurso.id) }}" method="POST">
+ <!-- Token de protecao CSRF -->
+ <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+ <div class="campo">
+    <label for="nome">Nome do Minicurso</label>
+    <input name="nome" id="nome" type="text" 
+         value="{{ minicurso.nome }}"
+         placeholder="Digite o nome do minicurso..." required aria-required="true" maxlength="100">
+ </div>
+ <div class="campo">  
+   <button type="submit">Salvar</button>
+ </div>
+</form>
+
+<br>
+<div style="text-align: center;">
+  <a href="{{ url_for('minicursos.listar') }}">Voltar</a>
+</div>
+
+{% endblock %}
